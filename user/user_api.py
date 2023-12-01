@@ -19,9 +19,9 @@ async def register_user(data: UserRegisterValidator):
     # Если нет в базе такого email пользователя, то добавляем
     if checker:
         result = register_user_db(**new_user_data)
-        return {'message': result}
+        return {'status': 1, 'message': result}
     else:
-        return {'message': 'Пользователь с таким email уже есть'}
+        return {'status': 0, 'message': 'Пользователь с таким email уже есть'}
 
 # Получения информации о пользователе
 @user_router.get('/info')

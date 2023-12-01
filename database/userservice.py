@@ -11,10 +11,11 @@ def register_user_db(name, surname, email, phone_number,
 
     new_user = User(name=name, surname=surname, email=email,
                     phone_number=phone_number, password=password, reg_date=datetime.now())
+
     db.add(new_user)
     db.commit()
 
-    return f'Пользователь успешно зарегистрирован {new_user.user_id}'
+    return f'Пользователь зарегистрирован id - {new_user.user_id}'
 
 
 def get_exact_user_db(user_id):
@@ -32,9 +33,10 @@ def check_user_email_db(email):
     checker = db.query(User).filter_by(email=email).first()
 
     if checker:
-        return checker
-    else:
-        return 'Пользователь с таким email не зарегистрирован!'
+        return False
+
+    return True
+
 
 # Изменить данные у полльзоват
 def edit_user_db(user_id, edit_type, new_data):
